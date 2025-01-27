@@ -14,8 +14,17 @@ import { Redirect } from "expo-router";
 // import { useGlobalContext } from "@/lib/global-provider";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
+import { login } from "@/lib/appwrite";
 
-const Auth = () => {
+const SignIn = () => {
+  const handleLogin = async () => {
+    const result = await login();
+    if (result) {
+      console.log("successfully login");
+    } else {
+      Alert.alert("Failed to login");
+    }
+  };
   return (
     <SafeAreaView className="bg-white h-full">
       <ScrollView
@@ -44,7 +53,7 @@ const Auth = () => {
           </Text>
 
           <TouchableOpacity
-            // onPress={handleLogin}
+            onPress={handleLogin}
             className="bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5"
           >
             <View className="flex flex-row items-center justify-center">
@@ -64,4 +73,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default SignIn;
